@@ -27,6 +27,9 @@ namespace JobApplicationTracker.View
                 case "d":
                     JobTrackerApp.DeleteOffer();
                     break;
+                case "E":
+                case "e":
+                    break;
                 default:
                     Console.WriteLine("Invalid input!");
                     break;
@@ -35,7 +38,7 @@ namespace JobApplicationTracker.View
 
         public static string GetUserInput(string prompt)
         {
-            Console.WriteLine($"Enter {prompt}");
+            Console.WriteLine($"\nEnter {prompt}: ");
             return Console.ReadLine();
         }
 
@@ -87,6 +90,16 @@ namespace JobApplicationTracker.View
         {
             Console.WriteLine("\n\nPress enter to continue...\n");
             Console.ReadLine();
+            Console.Clear();
+        }
+
+        public static void PrintDotAnimation(int timer = 10)
+        {
+            for (int i = 0; i < timer; i++)
+            {
+                Console.Write(".");
+                Thread.Sleep(200);
+            }
         }
     }
 }

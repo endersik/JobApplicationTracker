@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JobApplicationTracker.Model.Entities;
 
 namespace JobApplicationTracker.View
 {
@@ -19,28 +20,24 @@ namespace JobApplicationTracker.View
         }
 
         internal static void AskUserForOperation(){
-            Console.Clear();
             Console.WriteLine("Choose an operation to perform;"
                                 + "\n(C)reate"
                                 + "\n(R)ead"
                                 + "\n(U)pdate"
-                                + "\n(D)elete");
+                                + "\n(D)elete"
+                                + "\n(E)xit");
             Utility.GetUserAction();
 
         }
 
-        internal static void AskUserForOfferDetails(){
+        internal static void AskUserForOfferDetails(JobOffer jobOffer){
             Console.Clear();
 
-            JobOffer jobOffer= new JobOffer();
+            jobOffer.CompanyName = Utility.GetUserInput("company name");
 
-            jobOffer.CompanyName = Utility.GetUserInput("company name: ");
-            Console.WriteLine(jobOffer.CompanyName);
+            jobOffer.Position = Utility.GetUserInput("position");
 
-            jobOffer.Position = Utility.GetUserInput("position: ");
-            Console.WriteLine(jobOffer.Position);
-
-            Console.WriteLine("Choose seniority level:"
+            Console.WriteLine("\nChoose seniority level:"
                                 + "\n1-Intern"
                                 + "\n2-Junior"
                                 + "\n3-Associate"
@@ -49,17 +46,46 @@ namespace JobApplicationTracker.View
                                 + "\n6-Lead"
                                 + "\n7-Manager");
             Utility.GetUserInput(jobOffer);
-            Console.WriteLine(jobOffer.Seniority);
 
-            jobOffer.Deadline = Utility.GetUserInput("application deadline: ");
-            Console.WriteLine(jobOffer.Deadline);
+            jobOffer.Deadline = Utility.GetUserInput("application deadline");
 
             Console.WriteLine("Did you apply to the offer?"
                                 + "(Y)es/(N)o");
             jobOffer.IsApplied = Utility.GetUserInput();
-            Console.WriteLine(jobOffer.IsApplied);
+            
+            Utility.PrintDotAnimation();
+        }
 
-            Console.WriteLine(JobOffer.IsExpired(jobOffer.Deadline));
+        public static void DisplayList(){
+            
+            for(int i=0; i<JobOfferList._jobs.Count(); i++){
+                Console.ForegroundColor = ConsoleColor.Yellow;
+
+                Console.Write("\n{0}- ", i+1);
+                Console.Write(JobOfferList._jobs[i].CompanyName);
+                Console.Write(", " + JobOfferList._jobs[i].Position);
+                Console.Write(", " + JobOfferList._jobs[i].Seniority);
+                Console.Write(", " + JobOfferList._jobs[i].Deadline);
+                if(JobOfferList._jobs[i].IsApplied){
+                    Console.WriteLine(", Applied.");
+                }
+                else{
+                    Console.WriteLine(", Didn't Applied.");
+                }
+
+                Utility.PrintDotAnimation(20);
+                Console.ForegroundColor = ConsoleColor.White;
+                Utility.PressEnterToContinue();
+            }
+            AppScreen.PrintGreen("End of the list.");
+        }
+
+        public static void PrintGreen(string prompt){
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n" + prompt);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Utility.PressEnterToContinue();
         }
     }
 }

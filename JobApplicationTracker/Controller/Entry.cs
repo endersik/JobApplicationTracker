@@ -1,4 +1,5 @@
 ﻿using JobApplicationTracker;
+using JobApplicationTracker.Controller;
 using JobApplicationTracker.View;
 using System;
 
@@ -9,7 +10,9 @@ namespace JobApplicationTracker
         static void Main(string[] args)
         {
             AppScreen.Welcome();
+
             AppScreen.AskUserForOperation();
+            
 
             
         }

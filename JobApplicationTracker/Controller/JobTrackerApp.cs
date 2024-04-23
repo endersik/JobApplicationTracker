@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using JobApplicationTracker.Model.Entities;
 using JobApplicationTracker.View;
 
 namespace JobApplicationTracker.Controller
@@ -9,10 +6,33 @@ namespace JobApplicationTracker.Controller
     public class JobTrackerApp
     {
         public static void CreateOffer(){
-            AppScreen.AskUserForOfferDetails();
+            JobOffer jobOffer= new JobOffer();
+            AppScreen.AskUserForOfferDetails(jobOffer);
+            JobOfferList._jobs.Add(jobOffer);
+            
+            AppScreen.PrintGreen("The offer has been successfully created.");
+            Utility.PressEnterToContinue();
+            
+            AppScreen.AskUserForOperation();
         }
-        public static void ReadOffer(){}
-        public static void UpdateOffer(){}
-        public static void DeleteOffer(){}
+        public static void ReadOffer(){
+            AppScreen.DisplayList();
+            
+            AppScreen.AskUserForOperation();
+        }
+        public static void UpdateOffer(){
+            int index = int.Parse(Utility.GetUserInput("index number"));
+            AppScreen.AskUserForOfferDetails(JobOfferList._jobs[--index]);
+            AppScreen.PrintGreen("The offer has been successfully updated.");
+
+            AppScreen.AskUserForOperation();
+        }
+        public static void DeleteOffer(){
+            int index = int.Parse(Utility.GetUserInput("index number"));
+            JobOfferList._jobs.RemoveAt(--index);
+            AppScreen.PrintGreen("The offer has been successfully removed.");
+
+            AppScreen.AskUserForOperation();
+        }
     }
 }
