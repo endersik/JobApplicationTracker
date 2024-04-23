@@ -28,5 +28,38 @@ namespace JobApplicationTracker.View
             Utility.GetUserAction();
 
         }
+
+        internal static void AskUserForOfferDetails(){
+            Console.Clear();
+
+            JobOffer jobOffer= new JobOffer();
+
+            jobOffer.CompanyName = Utility.GetUserInput("company name: ");
+            Console.WriteLine(jobOffer.CompanyName);
+
+            jobOffer.Position = Utility.GetUserInput("position: ");
+            Console.WriteLine(jobOffer.Position);
+
+            Console.WriteLine("Choose seniority level:"
+                                + "\n1-Intern"
+                                + "\n2-Junior"
+                                + "\n3-Associate"
+                                + "\n4-MidLevel"
+                                + "\n5-Senior"
+                                + "\n6-Lead"
+                                + "\n7-Manager");
+            Utility.GetUserInput(jobOffer);
+            Console.WriteLine(jobOffer.Seniority);
+
+            jobOffer.Deadline = Utility.GetUserInput("application deadline: ");
+            Console.WriteLine(jobOffer.Deadline);
+
+            Console.WriteLine("Did you apply to the offer?"
+                                + "(Y)es/(N)o");
+            jobOffer.IsApplied = Utility.GetUserInput();
+            Console.WriteLine(jobOffer.IsApplied);
+
+            Console.WriteLine(JobOffer.IsExpired(jobOffer.Deadline));
+        }
     }
 }

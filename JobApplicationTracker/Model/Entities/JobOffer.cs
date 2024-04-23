@@ -7,7 +7,7 @@ namespace JobApplicationTracker
 {
 
     public enum Seniority{
-        Intern,
+        Intern = 1,
         Junior,
         Associate,
         MidLevel,
