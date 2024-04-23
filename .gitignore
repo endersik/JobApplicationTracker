@@ -10,3 +10,17 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Build and dependencies folders
+bin/
+obj/
+.vscode/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code specific files
+.vscode/
