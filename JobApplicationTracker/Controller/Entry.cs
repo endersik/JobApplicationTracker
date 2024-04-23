@@ -1,4 +1,5 @@
 ﻿using JobApplicationTracker;
+using JobApplicationTracker.View;
 using System;
 
 namespace JobApplicationTracker
@@ -7,6 +8,9 @@ namespace JobApplicationTracker
     {
         static void Main(string[] args)
         {
+            AppScreen.Welcome();
+            AppScreen.AskUserForOperation();
+
             JobOffer jobOffer= new JobOffer();
 
             jobOffer.CompanyName = Console.ReadLine();

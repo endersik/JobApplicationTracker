@@ -26,30 +26,15 @@ namespace JobApplicationTracker
         public JobOffer(string companyName = " ", string position = " ", Seniority seniority = Seniority.Intern,
                         string deadline = " ", bool isApplied = false){}
 
-        public string CompanyName{
-            get{return companyName;}
-            set{companyName = value;}
-        }
+        public string CompanyName{get; set;}
 
-        public string Position{
-            get{return position;}
-            set{position = value;}
-        }
+        public string Position{get; set;}
 
-        public Seniority Seniority{
-            get{return seniority;}
-            set{seniority = value;}
-        }
+        public Seniority Seniority{get; set;}
 
-        public string Deadline{
-            get{return deadline;}
-            set{deadline = value;}
-        }
+        public string Deadline{get; set;}
 
-        public bool IsApplied{
-            get{return isApplied;}
-            set{isApplied = value;}
-        }
+        public bool IsApplied{get; set;}
 
         public static bool IsExpired(string deadline){
             DateOnly _deadline = DateOnly.Parse(deadline);
