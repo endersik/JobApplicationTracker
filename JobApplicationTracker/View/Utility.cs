@@ -31,7 +31,8 @@ namespace JobApplicationTracker.View
                 case "e":
                     break;
                 default:
-                    Console.WriteLine("Invalid input!");
+                    PrintRed("Invalid input, try again!");
+                    AppScreen.AskUserForOperation();
                     break;
             }
         }
@@ -68,7 +69,7 @@ namespace JobApplicationTracker.View
                     jobOffer.Seniority = Seniority.Manager;
                     break;
                 default:
-                    Console.WriteLine("Invalid input!");
+                    PrintRed("Invalid input!");
                     break;
             }
         }
@@ -83,6 +84,7 @@ namespace JobApplicationTracker.View
                 case "n":
                     return false;
                 default:
+                    PrintRed("Invalid input!");
                     return false;
             }
         }
@@ -100,6 +102,23 @@ namespace JobApplicationTracker.View
                 Console.Write(".");
                 Thread.Sleep(200);
             }
+            Console.WriteLine("\n");
+        }
+
+        public static void PrintGreen(string prompt){
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n" + prompt);
+            Console.ForegroundColor = ConsoleColor.Blue;
+
+            Utility.PressEnterToContinue();
+        }
+
+        public static void PrintRed(string prompt){
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n" + prompt);
+            Console.ForegroundColor = ConsoleColor.Blue;
+
+            Utility.PressEnterToContinue();
         }
     }
 }

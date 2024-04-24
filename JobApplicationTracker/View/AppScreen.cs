@@ -14,9 +14,7 @@ namespace JobApplicationTracker.View
 
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("--------------------Welcome to Job Application Tracker App--------------------");
-            Console.ForegroundColor = ConsoleColor.White;
-
-            Utility.PressEnterToContinue();
+            Console.WriteLine("\n");
         }
 
         internal static void AskUserForOperation(){
@@ -27,7 +25,6 @@ namespace JobApplicationTracker.View
                                 + "\n(D)elete"
                                 + "\n(E)xit");
             Utility.GetUserAction();
-
         }
 
         internal static void AskUserForOfferDetails(JobOffer jobOffer){
@@ -46,8 +43,14 @@ namespace JobApplicationTracker.View
                                 + "\n6-Lead"
                                 + "\n7-Manager");
             Utility.GetUserInput(jobOffer);
-
-            jobOffer.Deadline = Utility.GetUserInput("application deadline");
+            DateOnly temp;
+            string answer = Utility.GetUserInput("application deadline (mm/dd/yy)");
+            if(DateOnly.TryParse(answer, out temp)){
+                jobOffer.Deadline = answer;
+            }
+            else{
+                Utility.PrintRed("Invalid input!");
+            }
 
             Console.WriteLine("Did you apply to the offer?"
                                 + "(Y)es/(N)o");
@@ -66,6 +69,7 @@ namespace JobApplicationTracker.View
                 Console.Write(", " + JobOfferList._jobs[i].Position);
                 Console.Write(", " + JobOfferList._jobs[i].Seniority);
                 Console.Write(", " + JobOfferList._jobs[i].Deadline);
+                
                 if(JobOfferList._jobs[i].IsApplied){
                     Console.WriteLine(", Applied.");
                 }
@@ -73,19 +77,16 @@ namespace JobApplicationTracker.View
                     Console.WriteLine(", Didn't Applied.");
                 }
 
-                Utility.PrintDotAnimation(20);
-                Console.ForegroundColor = ConsoleColor.White;
+                if(JobOffer.IsExpired(JobOfferList._jobs[i].Deadline)){
+                    Utility.PrintRed("Deadline has passed!");
+                }
+
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Utility.PressEnterToContinue();
             }
-            AppScreen.PrintGreen("End of the list.");
+            Utility.PrintGreen("End of the list.");
         }
 
-        public static void PrintGreen(string prompt){
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\n" + prompt);
-            Console.ForegroundColor = ConsoleColor.White;
-
-            Utility.PressEnterToContinue();
-        }
+        
     }
 }

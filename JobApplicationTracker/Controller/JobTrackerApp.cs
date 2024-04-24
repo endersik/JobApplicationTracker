@@ -10,7 +10,7 @@ namespace JobApplicationTracker.Controller
             AppScreen.AskUserForOfferDetails(jobOffer);
             JobOfferList._jobs.Add(jobOffer);
             
-            AppScreen.PrintGreen("The offer has been successfully created.");
+            Utility.PrintGreen("The offer has been successfully created.");
             Utility.PressEnterToContinue();
             
             AppScreen.AskUserForOperation();
@@ -21,17 +21,29 @@ namespace JobApplicationTracker.Controller
             AppScreen.AskUserForOperation();
         }
         public static void UpdateOffer(){
-            int index = int.Parse(Utility.GetUserInput("index number"));
-            AppScreen.AskUserForOfferDetails(JobOfferList._jobs[--index]);
-            AppScreen.PrintGreen("The offer has been successfully updated.");
-
+            int input = int.Parse(Utility.GetUserInput("index number"));
+            
+            if(input > 0 && input <= JobOfferList._jobs.Count){
+                AppScreen.AskUserForOfferDetails(JobOfferList._jobs[input-1]);
+                Utility.PrintGreen("The offer has been successfully updated.");
+            }else{
+                Utility.PrintRed("That offer doesn't exist.");
+            }
+            
+            Utility.PressEnterToContinue();
             AppScreen.AskUserForOperation();
         }
         public static void DeleteOffer(){
-            int index = int.Parse(Utility.GetUserInput("index number"));
-            JobOfferList._jobs.RemoveAt(--index);
-            AppScreen.PrintGreen("The offer has been successfully removed.");
+            int input = int.Parse(Utility.GetUserInput("index number"));
+            
+            if(input > 0 && input <= JobOfferList._jobs.Count){
+                JobOfferList._jobs.RemoveAt(input-1);
+                Utility.PrintGreen("The offer has been successfully removed.");
+            }else{
+                Utility.PrintRed("That offer doesn't exist.");
+            }
 
+            Utility.PressEnterToContinue();
             AppScreen.AskUserForOperation();
         }
     }
